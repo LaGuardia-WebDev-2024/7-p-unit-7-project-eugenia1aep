@@ -4,35 +4,39 @@ void setup() {
 }
 
 //🎯Variable Declarations Go Here
-var fireworkX = 20;
+var fireworkX = 200; // X position for the firework
+var fireworkY = 200; // Y position for the firework
+var explosionSize = 10; // Starting size of the firework explosion
+var fireworkR = 255; // Red component of the color
+var fireworkG = 100; // Green component of the color
+var fireworkB = 0;   // Blue component of the color
 
 //🟢Draw Procedure - Runs on Repeat
 draw = function(){
  
   background(255,255,255,0);
+  // Add Text on Canvas
+  // Text color (white)
+    textSize(24); // Text size
+    text("firework show!", 120, 30); // message at the top of the canvas
   
-   if(mousePressed){
-    showXYPositions();
-    
-  }
   
   //🎯Animation Code Goes Here
-  rect(fireworkX, 15, 10, 10);
-  
-  fireworkX = fireworkX + 1;
+  fill(fireworkR, fireworkG, fireworkB); // Firework color
+  ellipse(fireworkX, fireworkY, explosionSize, explosionSize); // Draw the firework
 
-}
+  explosionSize += 2; // Increase explosion size
 
-//🟡Extra FUN Features Ms. Hall Added
-//Proceed with Caution (and Curiosity!)
+  // Reset explosion when it reaches a certain size
+  if (explosionSize > 50) {
+    explosionSize = 2; // Reset size
+    fireworkX = random(50, 350); // New random X position
+    fireworkY = random(50, 350); // New random Y position
+    
+    // Change firework color
+        fireworkR = random(0, 255);
+        fireworkG = random(0, 255);
+        fireworkB = random(0, 255);
+  }
 
-showXYPositions = function(){
-    fill(255,255,255)
-    rect(270,300,150,100)
-    fill(0,0,0)
-    textSize(30)
-    text("x = " + mouseX + "\ny = " +mouseY, 290, 350)
-    fill(255,0,255)
-    ellipse(mouseX, mouseY, 10, 10);
-    fill(255,255,255)
 }
